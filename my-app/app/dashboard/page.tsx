@@ -1,13 +1,13 @@
 "use client";
 
-import ProtectedRoute from "@/components/molecules/ProtectedRoute";
+import DashboardLayout from "@/components/organisms/DashboardLayout";
 
 export default function DashboardPage() {
   return (
-    <ProtectedRoute>
-      <div className="min-h-screen bg-[#05061a] text-white flex items-center justify-center">
-        <p>Dashboard 🎉</p>
+    <DashboardLayout title="Dashboard">
+      <div className="flex items-center justify-center h-64 text-gray-500 text-sm">
+        Dashboard content coming soon...
       </div>
-    </ProtectedRoute>
+    </DashboardLayout>
   );
 }
