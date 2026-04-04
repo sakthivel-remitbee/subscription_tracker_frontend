@@ -3,24 +3,21 @@
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import useIsClient from "@/hooks/useIsClient";
 
 export default function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const { user, accessToken } = useSelector((state: RootState) => state.user);
-  const [mounted, setMounted] = useState(false);
+  const isClient = useIsClient();
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (mounted && (!user || !accessToken)) {
+    if (isClient && (!user || !accessToken)) {
       router.replace("/login");
     }
-  }, [mounted, user, accessToken, router]);
+  }, [isClient, user, accessToken, router]);
 
-  if (!mounted) return null;
+  if (!isClient) return null;
   if (!user || !accessToken) return null;
 
   return <>{children}</>;

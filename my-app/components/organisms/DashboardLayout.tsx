@@ -10,7 +10,6 @@ export default function DashboardLayout({ children, title }: Props) {
   return (
     <ProtectedRoute>
       <div className="flex min-h-screen bg-[#05061a] text-white">
-        {/* Desktop sidebar — hidden on mobile */}
         <div className="hidden lg:block">
           <Sidebar />
         </div>

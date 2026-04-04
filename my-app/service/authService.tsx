@@ -1,13 +1,11 @@
-import axios from "axios";
-
-const BASE_URL = "http://localhost:5000/auth";
+import api from "@/utils/api";
 
 export const registerUser = async (data: {
   name: string;
   email: string;
   password: string;
 }) => {
-  const res = await axios.post(`${BASE_URL}/register`, data);
+  const res = await api.post("/auth/register", data);
   return res.data;
 };
 
@@ -15,6 +13,6 @@ export const loginUser = async (data: {
   email: string;
   password: string;
 }) => {
-  const res = await axios.post(`${BASE_URL}/login`, data);
+  const res = await api.post("/auth/login", data);
   return res.data;
 };

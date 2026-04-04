@@ -14,7 +14,6 @@ export default function DashboardHeader({ title }: Props) {
 
   return (
     <>
-      {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
@@ -22,7 +21,6 @@ export default function DashboardHeader({ title }: Props) {
         />
       )}
 
-      {/* Mobile sidebar drawer */}
       <div
         className={`fixed top-0 left-0 z-50 h-full transition-transform duration-300 lg:hidden ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -33,7 +31,6 @@ export default function DashboardHeader({ title }: Props) {
 
       <header className="flex items-center justify-between px-6 py-4 border-b border-white/5">
         <div className="flex items-center gap-3">
-          {/* Hamburger — mobile only */}
           <button
             onClick={() => setSidebarOpen(true)}
             className="lg:hidden w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white transition-colors"
@@ -48,7 +45,6 @@ export default function DashboardHeader({ title }: Props) {
         </div>
 
         <div className="flex items-center gap-3">
-          {/* Notification */}
           <button className="relative w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
@@ -57,7 +53,6 @@ export default function DashboardHeader({ title }: Props) {
             <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-purple-500 rounded-full"/>
           </button>
 
-          {/* User */}
           <div className="flex items-center gap-2">
             <Avatar name={user?.name ?? "U"} img={user?.img} size="md" />
             <div className="hidden sm:block">

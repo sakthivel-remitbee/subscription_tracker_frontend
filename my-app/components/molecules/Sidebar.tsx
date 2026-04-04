@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter, usePathname } from "next/navigation";
 import { RootState, AppDispatch } from "@/redux/store";
 import { logout, logoutUser } from "@/redux/userSlice";
-import Avatar from "../atoms/Avatar";
 
 
 const MENU = [
@@ -24,7 +23,7 @@ export default function Sidebar({ onClose }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const dispatch = useDispatch<AppDispatch>();
-  const { user } = useSelector((state: RootState) => state.user);
+  useSelector((state: RootState) => state.user);
 
   const NavItem = ({ label, icon, path }: { label: string; icon: string; path: string }) => {
     const active = pathname === path;
@@ -43,7 +42,6 @@ export default function Sidebar({ onClose }: Props) {
   return (
     <aside className="w-[200px] shrink-0 h-screen sticky top-0 flex flex-col border-r border-white/5 bg-[#05061a] px-3 py-4">
       <div className="flex items-center justify-between px-2 mb-8">
-        {/* Logo */}
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-white">
@@ -53,7 +51,6 @@ export default function Sidebar({ onClose }: Props) {
           <span className="font-semibold text-white text-sm">SubTrack</span>
         </div>
 
-        {/* Close button — mobile only */}
         {onClose && (
           <button
             onClick={onClose}
@@ -67,19 +64,16 @@ export default function Sidebar({ onClose }: Props) {
         )}
       </div>
 
-      {/* Menu */}
       <p className="text-[10px] text-gray-600 uppercase tracking-widest px-2 mb-2">Menu</p>
       <nav className="flex flex-col gap-1 mb-6">
         {MENU.map((item) => <NavItem key={item.path} {...item} />)}
       </nav>
 
-      {/* Account */}
       <p className="text-[10px] text-gray-600 uppercase tracking-widest px-2 mb-2">Account</p>
       <nav className="flex flex-col gap-1">
         {ACCOUNT.map((item) => <NavItem key={item.path} {...item} />)}
       </nav>
 
-      {/* Logout */}
       <div className="mt-auto">
         <button
           onClick={async () => {
