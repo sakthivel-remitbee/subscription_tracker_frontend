@@ -6,9 +6,9 @@ import axios, {
 import Cookies from "js-cookie";
 
 const DEFAULT_API_BASE_URL = "http://localhost:5000";
-
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL?.trim() || DEFAULT_API_BASE_URL;
+  process.env.NEXT_PUBLIC_API_BASE_URL?.trim().replace(/\/+$/, "") ||
+  DEFAULT_API_BASE_URL;
 
 type RetryableRequestConfig = InternalAxiosRequestConfig & {
   _retry?: boolean;

@@ -184,25 +184,27 @@ export default function SubscriptionsPage() {
               </p>
 
               <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-                  disabled={!pagination.hasPrevPage}
-                  className="rounded-lg border border-white/10 bg-[#161827] px-3 py-1.5 text-[#c8d0e4] transition hover:border-white/20 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  Prev
-                </button>
+                {pagination.hasPrevPage && (
+                  <button
+                    type="button"
+                    onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                    className="rounded-lg border border-white/10 bg-[#161827] px-3 py-1.5 text-[#c8d0e4] transition hover:border-white/20 hover:text-white"
+                  >
+                    Prev
+                  </button>
+                )}
                 <span className="min-w-[90px] text-center text-[#c8d0e4]">
                   Page {currentPage} of {totalPages}
                 </span>
-                <button
-                  type="button"
-                  onClick={() => setPage((prev) => prev + 1)}
-                  disabled={!pagination.hasNextPage}
-                  className="rounded-lg border border-white/10 bg-[#161827] px-3 py-1.5 text-[#c8d0e4] transition hover:border-white/20 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  Next
-                </button>
+                {pagination.hasNextPage && (
+                  <button
+                    type="button"
+                    onClick={() => setPage((prev) => prev + 1)}
+                    className="rounded-lg border border-white/10 bg-[#161827] px-3 py-1.5 text-[#c8d0e4] transition hover:border-white/20 hover:text-white"
+                  >
+                    Next
+                  </button>
+                )}
               </div>
             </div>
           </div>
