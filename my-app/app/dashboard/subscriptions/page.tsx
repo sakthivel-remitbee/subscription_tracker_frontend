@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { AxiosError } from "axios";
 import DashboardLayout from "@/components/organisms/DashboardLayout";
 import SubscriptionsTable from "@/components/organisms/SubscriptionsTable";
 import SubscriptionFilters from "@/components/molecules/SubscriptionFilters";
@@ -15,6 +16,24 @@ import {
   StatusFilter,
   SubscriptionItem,
 } from "@/types/subscription";
+
+const getRequestErrorMessage = (error: unknown) => {
+  if (error instanceof AxiosError) {
+    if (typeof error.response?.data?.message === "string") {
+      return error.response.data.message;
+    }
+
+    if (error.code === "ERR_NETWORK") {
+      return "Unable to reach the API. Check that the backend is running and that NEXT_PUBLIC_API_BASE_URL points to the correct server.";
+    }
+  }
+
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  return "Unable to load subscriptions right now.";
+};
 
 export default function SubscriptionsPage() {
   const [isAddingSubscription, setIsAddingSubscription] = useState(false);
@@ -45,12 +64,14 @@ export default function SubscriptionsPage() {
     monthlyCost: "$0.00",
     currency: "USD",
   });
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   useEffect(() => {
     let isMounted = true;
 
     const loadSubscriptions = async () => {
       try {
+        setLoadError(null);
         const response = await fetchSubscriptionsRequest({
           page,
           limit: 10,
@@ -65,6 +86,9 @@ export default function SubscriptionsPage() {
         setPagination(response.pagination);
         setSummary(response.summary);
       } catch (error) {
+        if (!isMounted) return;
+
+        setLoadError(getRequestErrorMessage(error));
         console.error("Failed to fetch subscriptions:", error);
       }
     };
@@ -121,6 +145,12 @@ export default function SubscriptionsPage() {
               status={status}
               totalActive={summary.totalActive}
             />
+
+            {loadError && (
+              <div className="mt-4 rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3">
+                <p className="text-sm text-red-300">{loadError}</p>
+              </div>
+            )}
 
             <SubscriptionsTable
               onCloseMenu={() => setOpenMenuId(null)}
