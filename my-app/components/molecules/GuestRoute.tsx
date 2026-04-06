@@ -13,7 +13,7 @@ export default function GuestRoute({ children }: { children: React.ReactNode }) 
 
   useEffect(() => {
     if (isClient && user && accessToken) {
-      router.replace("/dashboard");
+      router.replace("/subscriptions");
     }
   }, [isClient, user, accessToken, router]);
 
