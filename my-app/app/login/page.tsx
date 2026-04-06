@@ -26,7 +26,7 @@ export default function LoginPage() {
 
         <div className="w-full max-w-[448px]">
           <p
-            onClick={() => router.push("/login")}
+            onClick={() => router.push("/signup")}
             className="text-xs text-gray-400 mb-4 cursor-pointer hover:text-gray-300 transition-colors"
           >
             ← Back to home
