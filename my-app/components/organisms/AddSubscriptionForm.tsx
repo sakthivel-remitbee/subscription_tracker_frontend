@@ -5,7 +5,10 @@ import {
   createSubscriptionRequest,
   updateSubscriptionRequest,
 } from "@/service/subscriptionService";
-import { SubscriptionItem } from "@/types/subscription";
+import {
+  CreateSubscriptionPayload,
+  SubscriptionItem,
+} from "@/types/subscription";
 
 type Props = {
   onBack: () => void;
@@ -160,7 +163,7 @@ export default function AddSubscriptionForm({
     setLoading(true);
 
     try {
-      const payload = {
+      const payload: CreateSubscriptionPayload = {
         serviceName: serviceName.trim(),
         category,
         cost: Number.parseFloat(cost),
